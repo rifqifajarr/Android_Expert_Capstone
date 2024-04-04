@@ -4,6 +4,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.capstone.core.R
@@ -14,12 +16,19 @@ class GameAdapter : RecyclerView.Adapter<GameAdapter.ListViewHolder>() {
     private var listData = ArrayList<Game>()
     var onItemClick: ((Game) -> Unit)? = null
 
-    fun setData(newListData: List<Game>?) {
-        if (newListData == null) return
-        listData.clear()
-        listData.addAll(newListData)
-        notifyDataSetChanged()
+    private var diffCallback = object : DiffUtil.ItemCallback<Game>() {
+        override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
+            return oldItem.gameId == newItem.gameId
+        }
+
+        override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
+            return oldItem == newItem
+        }
     }
+
+    private val differ = AsyncListDiffer(this, diffCallback)
+
+    fun setData(gameList: List<Game>) = differ.submitList(gameList)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameAdapter.ListViewHolder =
         ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_list_game, parent, false))

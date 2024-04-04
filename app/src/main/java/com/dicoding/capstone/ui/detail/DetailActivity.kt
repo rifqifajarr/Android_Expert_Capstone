@@ -32,10 +32,10 @@ class DetailActivity : AppCompatActivity() {
 
     private fun showDetailGame(detailGame: Game) {
         binding.tvTitle.text = detailGame.name
-        binding.tvRating.text = "Rating: ${detailGame.rating}"
-        binding.tvMetacritic.text = "Metacritic: ${detailGame.metaCritic}"
-        binding.tvReleased.text = "Released: ${detailGame.released}"
-        binding.tvPlaytime.text = "Play Time (Hours): ${detailGame.playTime}"
+        binding.tvRating.text = getString(R.string.rating, detailGame.rating)
+        binding.tvMetacritic.text = getString(R.string.metacritic, detailGame.metaCritic)
+        binding.tvReleased.text = getString(R.string.released, detailGame.released)
+        binding.tvPlaytime.text = getString(R.string.play_time_hours, detailGame.playTime)
         Glide.with(this)
             .load(detailGame.imageUrl)
             .into(binding.ivGameImage)

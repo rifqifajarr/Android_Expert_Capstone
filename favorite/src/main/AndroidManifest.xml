@@ -11,8 +11,9 @@
         <dist:fusing dist:include="true" />
     </dist:module>
 
-    <application>
-        <activity android:name=".FavoriteActivity">
+    <application android:icon="@mipmap/ic_launcher">
+        <activity android:name=".FavoriteActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
