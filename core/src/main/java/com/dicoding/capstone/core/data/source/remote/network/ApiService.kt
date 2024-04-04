@@ -1,7 +1,6 @@
 package com.dicoding.capstone.core.data.source.remote.network
 
 import com.dicoding.capstone.core.data.source.remote.response.GameResponse
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 

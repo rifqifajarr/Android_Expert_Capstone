@@ -26,7 +26,7 @@ val databaseModule = module {
     }
 }
 
-private val API_KEY = "f6b47dfcd4bb4c87802e7d52fd924e53"
+private const val API_KEY = "f6b47dfcd4bb4c87802e7d52fd924e53"
 
 val networkModule = module {
     single {

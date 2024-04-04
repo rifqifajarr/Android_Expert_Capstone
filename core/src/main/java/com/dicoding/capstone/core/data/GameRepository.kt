@@ -1,8 +1,6 @@
 package com.dicoding.capstone.core.data
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.dicoding.capstone.core.data.source.local.LocalDataSource
 import com.dicoding.capstone.core.data.source.remote.RemoteDataSource
 import com.dicoding.capstone.core.data.source.remote.network.ApiResponse
