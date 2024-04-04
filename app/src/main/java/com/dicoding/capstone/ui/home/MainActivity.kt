@@ -44,13 +44,12 @@ class MainActivity : AppCompatActivity() {
                     is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
-                        adapter.setData(game.data)
+                        game.data?.let { adapter.setData(it) }
                         binding.rvGame.adapter = adapter
                     }
 
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
-//                        TODO("1. bikin error handling")
                     }
                 }
             }
