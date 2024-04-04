@@ -15,14 +15,14 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_DATA = "extra_data"
     }
 
-    private lateinit var binding: ActivityDetailBinding
+    private var binding: ActivityDetailBinding? = null
 
     private val viewModel: DetailViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(binding?.root)
 
         val detailGame = intent.getParcelableExtra<Game>(EXTRA_DATA)
         if (detailGame != null) {
@@ -30,19 +30,29 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
+
     private fun showDetailGame(detailGame: Game) {
-        binding.tvTitle.text = detailGame.name
-        binding.tvRating.text = getString(R.string.rating, detailGame.rating)
-        binding.tvMetacritic.text = getString(R.string.metacritic, detailGame.metaCritic)
-        binding.tvReleased.text = getString(R.string.released, detailGame.released)
-        binding.tvPlaytime.text = getString(R.string.play_time_hours, detailGame.playTime)
-        Glide.with(this)
-            .load(detailGame.imageUrl)
-            .into(binding.ivGameImage)
+        binding?.let {
+            it.tvTitle.text = detailGame.name
+            it.tvRating.text = getString(R.string.rating, detailGame.rating)
+            it.tvMetacritic.text = getString(R.string.metacritic, detailGame.metaCritic)
+            it.tvReleased.text = getString(R.string.released, detailGame.released)
+            it.tvPlaytime.text = getString(R.string.play_time_hours, detailGame.playTime)
+        }
+
+        binding?.ivGameImage?.let {
+            Glide.with(this)
+                .load(detailGame.imageUrl)
+                .into(it)
+        }
 
         var favoriteStatus = detailGame.isFavorite
         setFavoriteStatus(favoriteStatus)
-        binding.fabFavorite.setOnClickListener {
+        binding?.fabFavorite?.setOnClickListener {
             favoriteStatus = !favoriteStatus
             viewModel.setFavoriteGame(detailGame, favoriteStatus)
             setFavoriteStatus(favoriteStatus)
@@ -51,11 +61,11 @@ class DetailActivity : AppCompatActivity() {
 
     private fun setFavoriteStatus(favorite: Boolean) {
         if (favorite) {
-            binding.fabFavorite.setImageDrawable(ContextCompat.getDrawable(this,
+            binding?.fabFavorite?.setImageDrawable(ContextCompat.getDrawable(this,
                 R.drawable.baseline_favorite_24
             ))
         } else {
-            binding.fabFavorite.setImageDrawable(ContextCompat.getDrawable(this,
+            binding?.fabFavorite?.setImageDrawable(ContextCompat.getDrawable(this,
                 R.drawable.baseline_favorite_border_24
             ))
         }
