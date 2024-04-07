@@ -5,16 +5,16 @@ import com.google.gson.annotations.SerializedName
 data class GameResponse(
 
 	@field:SerializedName("next")
-	val next: String,
+	val next: String? = null,
 
 	@field:SerializedName("previous")
-	val previous: String,
+	val previous: String? = null,
 
 	@field:SerializedName("count")
-	val count: Int,
+	val count: Int? = null,
 
 	@field:SerializedName("results")
-	val results: List<ResultsItem>
+	val results: List<ResultsItem?>? = null
 )
 
 data class EsrbRating(

@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 val databaseModule = module {
     factory { get<GameDatabase>().gameDao() }
     single {
-        val passphrase: ByteArray = SQLiteDatabase.getBytes("dicoding".toCharArray())
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("rifqifajar".toCharArray())
         val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
             androidContext(),

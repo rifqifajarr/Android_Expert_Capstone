@@ -8,17 +8,21 @@ object DataMapper {
 
     fun mapResponseToEntities(input: GameResponse): List<GameEntity> {
         val gameList = ArrayList<GameEntity>()
-        input.results.map {
-            val game = GameEntity(
-                gameId = it.id.toString(),
-                name = it.name,
-                rating = it.rating.toString(),
-                metacritic = it.metacritic.toString(),
-                released = it.released,
-                playTime = it.playtime.toString(),
-                imageUrl = it.backgroundImage,
-            )
-            gameList.add(game)
+        input.results?.map {
+            val game = it?.let { it1 ->
+                GameEntity(
+                    gameId = it.id.toString(),
+                    name = it1.name,
+                    rating = it.rating.toString(),
+                    metacritic = it.metacritic.toString(),
+                    released = it.released,
+                    playTime = it.playtime.toString(),
+                    imageUrl = it.backgroundImage,
+                )
+            }
+            if (game != null) {
+                gameList.add(game)
+            }
         }
         return gameList
     }
